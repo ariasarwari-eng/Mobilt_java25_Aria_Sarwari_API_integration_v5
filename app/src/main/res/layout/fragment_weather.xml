@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".WeatherFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weather"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="420dp"
+        android:layout_height="625dp"
+        android:layout_marginTop="100dp"
+        android:text="The weather will be shown here"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/historyButton"
+        android:layout_width="147dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="250dp"
+        android:text="Weather History" />
+</FrameLayout>
