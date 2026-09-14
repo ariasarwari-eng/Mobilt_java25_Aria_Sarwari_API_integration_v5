@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HistoryFragment">
+    tools:context=".StatisticsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -15,25 +15,17 @@
         android:padding="24dp">
 
         <TextView
-            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Weather History"
+            android:text="Statistics"
             android:textSize="28sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your previous searches will appear here."
+            android:text="Your weather statistics will appear here."
             android:textSize="16sp"
             android:layout_marginTop="16dp" />
-
-        <Button
-            android:id="@+id/statisticsButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Show Statistics"
-            android:layout_marginTop="18dp" />
 
     </LinearLayout>
 
