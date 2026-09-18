@@ -5,6 +5,7 @@ import java.io.FileInputStream
 
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.gms.google-services")
 }
 
 // localProperties objekt -> Properties localProperties = new Properties();
@@ -75,4 +76,10 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.ext.junit)
+
+    // firebase-bom bestämmer kompatibla Firebase-versioner åt oss.
+    implementation(platform("com.google.firebase:firebase-bom:34.19.0"))
+    // firebase-firestore lägger själva Firestore-biblioteket i appen.
+    implementation("com.google.firebase:firebase-firestore")
+    // Firebase rekommenderar Firebase BoM för att hantera kompatibla biblioteksversioner.
 }

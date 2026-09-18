@@ -18,6 +18,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link WeatherFragment#newInstance} factory method to
@@ -29,6 +34,9 @@ public class WeatherFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    // Vi skapar en variabel som ska hålla vår koppling till Firestore.
+    private FirebaseFirestore db;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -72,6 +80,9 @@ public class WeatherFragment extends Fragment {
 
         // Skapar / växlar fram Weather-layouten
         View view = inflater.inflate(R.layout.fragment_weather, container, false);
+
+        // hämtar vi Firebase/Firestore-instansen som appen ska använda.
+        db = FirebaseFirestore.getInstance();
 
         /*-----------------------HÄMA KOMPONENTER FRÅN XML--------------------------------------*/
 
@@ -157,6 +168,27 @@ public class WeatherFragment extends Fragment {
 
                         /* Nu har vi API datan som appen ska använda. Obs, anropet körs i en gen tråd och våra komponenter på sidan tillhör
                          * Androids UI-tråd. Att använda .setText innui denna hread går ej??--> temperatureText.setText(String.valueOf(temperature)); */
+
+                        // Skapar en Map, typ en box med obj innehållande egenskaper som vi vill spara
+                        Map<String, Object> weatherData = new HashMap<>();
+                        weatherData.put("city", city);
+                        weatherData.put("temperature", temperature);
+                        weatherData.put("humidity", humidity);
+                        weatherData.put("weather", weatherDescription);
+
+                        // Använd en collection som heter weatherHistory. -> collection en mapp där vi samlar våra vädersökningar.
+                        db.collection("weatherHistory")
+                                //Här skickar vi vår Map till Firestore.
+                                .add(weatherData)
+                                // för att kunna svara på resultatet, gick det att spara eller ej?
+                                .addOnSuccessListener(documentReference -> {
+                                    // Datan sparades i Firestore
+                                })
+                                .addOnFailureListener(e -> {
+                                    e.printStackTrace();
+                                });
+
+                        /* --> Firestore skapar automatiskt ett unikt ID för varje sökning.*/
 
                         //"När du har fått resultatet, gå tillbaka till appens UI-tråd och uppdatera skärmen."
                         // behövde ej omvandla double / int till String ?? pga bygger ihop meningen?
