@@ -13,18 +13,50 @@
         android:text="Weather"
         android:textSize="30sp" />
 
+    <EditText
+        android:id="@+id/cityInput"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginTop="60dp"
+        android:hint="Enter city"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/getWeatherButton"
+        android:layout_width="wrap_content"
+        android:layout_height="46dp"
+        android:layout_marginTop="120dp"
+        android:text="Get Weather" />
+
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="420dp"
-        android:layout_height="625dp"
-        android:layout_marginTop="100dp"
-        android:text="The weather will be shown here"
+        android:id="@+id/temperatureText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Temperature: --"
+        android:textSize="18sp"
+        android:layout_marginTop="200dp" />
+
+    <TextView
+        android:id="@+id/weatherText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weather: --"
+        android:textSize="18sp"
+        android:layout_marginTop="240dp" />
+
+    <TextView
+        android:id="@+id/humidityText"
+        android:layout_width="match_parent"
+        android:layout_height="31dp"
+        android:layout_marginTop="280dp"
+        android:text="Humidity: --"
         android:textSize="18sp" />
 
     <Button
         android:id="@+id/historyButton"
         android:layout_width="147dp"
         android:layout_height="52dp"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="550dp"
         android:text="Weather History" />
+
 </FrameLayout>
