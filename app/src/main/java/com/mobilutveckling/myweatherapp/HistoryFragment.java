@@ -8,6 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.google.firebase.Firebase;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,6 +75,43 @@ public class HistoryFragment extends Fragment {
         // hämta statistics knappen på history sidan
         // view ger åtkomst till vyn definerad ovan
         Button statisticsButton = view.findViewById(R.id.statisticsButton);
+
+        TextView historyText = view.findViewById(R.id.historyText);
+
+        // skapar koppling
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        // Hämta dokumenten som finns i vår weatherHistory-collection.
+        db.collection("weatherHistory")
+                .get()
+
+                        .addOnSuccessListener(queryDocumentSnapshots -> {
+                            StringBuilder history = new StringBuilder();
+
+                            // går igenom varje dokument och plockar ut samma information som vi tidigare sparade
+                            for (QueryDocumentSnapshot document : queryDocumentSnapshots){
+                                String city = document.getString("city");
+                                Double temperature = document.getDouble("temperature");
+                                Long humidity = document.getLong("humidity");
+                                String weather = document.getString("weather");
+
+                                // bygger ihop en text:
+                                history.append("City: ")
+                                        .append(city)
+                                        .append("\nTemperature: ")
+                                        .append(temperature)
+                                        .append(" °C\nWeather: ")
+                                        .append(weather)
+                                        .append("\nHumidity: ")
+                                        .append(humidity)
+                                        .append("%\n\n");
+                            }
+                            // till slut visas den i HistoryFragment.
+                            historyText.setText(history.toString());
+                        })
+                .addOnFailureListener(e -> {
+                    e.printStackTrace();
+                });
 
         // användaren klickar på statisticsButton
         statisticsButton.setOnClickListener(v -> {
