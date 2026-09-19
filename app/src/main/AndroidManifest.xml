@@ -18,7 +18,9 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustResize"
+            android:configChanges="orientation|screenSize">
+            <!-- Lägger tll kod raden ovan för att lösa problemet krng rotationen, appen hoppade tbx till startsidan vid roattion tidigare-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
