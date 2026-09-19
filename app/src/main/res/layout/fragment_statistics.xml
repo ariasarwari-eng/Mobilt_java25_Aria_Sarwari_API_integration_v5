@@ -21,10 +21,11 @@
             android:textSize="28sp" />
 
         <TextView
+            android:id="@+id/statisticsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your weather statistics will appear here."
-            android:textSize="16sp"
+            android:text="Loading statistics..."
+            android:textSize="18sp"
             android:layout_marginTop="16dp" />
 
     </LinearLayout>

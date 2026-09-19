@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.google.firebase.firestore.FirebaseFirestore;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,7 +61,34 @@ public class StatisticsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_statistics, container, false);
+
+        // skapar vår Statistics-vy.
+        View view = inflater.inflate(R.layout.fragment_statistics, container, false);
+
+        // hämtar relevant komponent
+        TextView statisticsText = view.findViewById(R.id.statisticsText);
+
+        // skapar kopplingen till Firestore.
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        // hämtar alla dokument från samma collection som vi redan använder i History.
+        db.collection("weatherHistory")
+                .get()
+
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+
+                                            // räknar hur många dokument som hämtades.
+                    int numberOfSearches = queryDocumentSnapshots.size();
+                    /* Eftersom varje vädersökning skapar ett nytt dokument, motsvarar antalet dokument antalet sökningar. */
+
+                    statisticsText.setText(
+                            "Total weather searches: " + numberOfSearches
+                    );
+                })
+                .addOnFailureListener(e -> {
+                    e.printStackTrace();
+                });
+
+        return view;
     }
 }
