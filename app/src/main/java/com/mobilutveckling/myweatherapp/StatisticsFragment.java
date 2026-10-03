@@ -62,25 +62,15 @@ public class StatisticsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // skapar vår Statistics-vy.
         View view = inflater.inflate(R.layout.fragment_statistics, container, false);
 
-        // hämtar relevant komponent
         TextView statisticsText = view.findViewById(R.id.statisticsText);
-
-        // skapar kopplingen till Firestore.
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        // hämtar alla dokument från samma collection som vi redan använder i History.
         db.collection("weatherHistory")
                 .get()
-
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-
-                                            // räknar hur många dokument som hämtades.
                     int numberOfSearches = queryDocumentSnapshots.size();
-                    /* Eftersom varje vädersökning skapar ett nytt dokument, motsvarar antalet dokument antalet sökningar. */
-
                     statisticsText.setText(
                             "Total weather searches: " + numberOfSearches
                     );
